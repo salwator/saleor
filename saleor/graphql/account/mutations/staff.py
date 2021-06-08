@@ -533,7 +533,7 @@ class UserAvatarUpdate(BaseMutation):
     def perform_mutation(cls, _root, info, image):
         user = info.context.user
         image_data = info.context.FILES.get(image)
-        validate_image_file(image_data, "image")
+        validate_image_file(image_data, "image", AccountErrorCode)
 
         if user.avatar:
             user.avatar.delete_sized_images()
